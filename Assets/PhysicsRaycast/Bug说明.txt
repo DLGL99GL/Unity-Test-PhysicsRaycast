@@ -1,0 +1,7 @@
+找到原因了，是Physics.autoSyncTransforms这个设置的问题，通过Unity2019新建的工程，默认是Physics.autoSyncTransforms = false;就会出现这种滞后的问题；（当修改物体的Transform信息时，会出现这种物体系统变化更新问题）
+
+Physics.autoSyncTransforms：每当“ 变换”组件发生更改时，是否自动使变换与物理系统发生变化。
+
+当Transform组件发生更改时，可能需要根据Transform的更改重新放置，旋转或缩放该Transform上的任何刚体或碰撞器或其子级。通过将此属性设置为true，可以控制对“ 变换”所做的更改是否自动应用于正确的组件。如果设置为false，则同步仅在固定更新期间发生在物理模拟步骤之前。您还可以使用Physics.SyncTransforms手动同步变换更改。注意
+
+：当autoSyncTransforms设置为true时，反复更改Transform然后执行物理查询可能会导致性能下降。为避免影响性能，如果要连续执行多个Transform更改和查询，请将autoSyncTransforms设置为false。您仅应将autoSyncTransforms设置为true，以在Unity 2017.2之前完成的现有项目中实现物理向后兼容性。对于从Unity 2017.2起创建的项目，请关闭此选项。
